@@ -1,6 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-import { NavBar } from './Navbar/component';
+import { NavBar } from './Navbar';
+
+import css from './layout.module.css';
+
 export function Layout() {
   const links = [
     {
@@ -12,12 +15,15 @@ export function Layout() {
       path: '/favorite',
     },
   ];
+
   return (
-    <div className="container">
-      <header className="header">
+    <div>
+      <header className={css.header}>
         <NavBar links={links} />
       </header>
-      <Outlet />
+      <div className={css.content}>
+        <Outlet />
+      </div>
     </div>
   );
 }

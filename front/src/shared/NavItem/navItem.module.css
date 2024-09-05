@@ -1,0 +1,22 @@
+a {
+    text-decoration: none;
+    color: var(--primary-text-inactive);
+    transition: color 0.3s ease;
+}
+
+.active {
+    color: var(--primary-text);
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 1rem;
+    height: 100%;
+    transition: background 0.3s ease;
+}
+
+.activeNav {
+    background: var(--primary-background-active);
+}

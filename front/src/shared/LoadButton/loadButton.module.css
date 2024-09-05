@@ -1,0 +1,6 @@
+.loadMoreCatsButton {
+    border: 0;
+    padding-bottom: 10px;
+    background: inherit;
+    cursor: pointer;
+}

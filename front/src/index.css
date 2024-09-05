@@ -11,18 +11,3 @@
   --primary-text: #fff;
   --primary-text-inactive: rgba(255, 255, 255, 0.7);
 }
-
-header {
-  background-color: var(--primary-background);
-  height: 64px;
-  width: 100%;
-  padding: 0 60px;
-  display: flex;
-  align-items: center;
-  box-shadow: #000 0 0 4px;
-}
-
-.container {
-  margin: 0 auto;
-  width: 100%;
-}

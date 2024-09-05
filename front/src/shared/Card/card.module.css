@@ -1,0 +1,9 @@
+.cardWrapper {
+    position: relative;
+}
+
+.cardWrapper img {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+}
