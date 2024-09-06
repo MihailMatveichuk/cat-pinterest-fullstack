@@ -1,0 +1,8 @@
+.likeCheckBoxWrapper {
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
+    cursor: pointer;
+    width: min-content;
+    aspect-ratio: 1 / 1;
+}

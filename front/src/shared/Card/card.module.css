@@ -1,9 +1,17 @@
 .cardWrapper {
     position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
 .cardWrapper img {
-    border-radius: 8px;
     width: 100%;
-    height: auto;
+    height: 100%;
+}
+
+.cardWrapper:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    box-shadow: 0 4px #0000003a;
 }

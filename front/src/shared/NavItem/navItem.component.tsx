@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { LinkType } from '@/app/layout/Navbar/navBar.component';
+import { LinkType } from '@/app/layout/Navbar';
 
 import css from './navItem.module.css';
 

@@ -1,1 +1,1 @@
-export { NavBar } from './navBar.component';
+export { NavBar, type LinkType } from './navBar.component';

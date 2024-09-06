@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { cardItems } from '@/mock';
-import { Loader } from '@/shared/Loader';
-import { LoadButton } from '@/shared/LoadButton';
-import { CardsList } from '@/shared/CardsList';
+import { CardsList, LoadButton, Loader } from '@/shared';
 
 import css from './mainPage.module.css';
 

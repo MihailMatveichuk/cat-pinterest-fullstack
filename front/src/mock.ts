@@ -1,4 +1,4 @@
-import CatImage from '../public/CatImage.png';
+import CatImage from '@/assets/CatImage.png';
 
 export const cardItems = [
   { id: '1', src: CatImage, isFavorite: true },
