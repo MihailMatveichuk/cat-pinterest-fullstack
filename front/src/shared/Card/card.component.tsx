@@ -8,25 +8,20 @@ export function Card({ src }: { src: string }) {
   const [isChecked, isCheckedSet] = useState(false);
   const [isHovered, isHoveredSet] = useState(false);
 
-  const handleMouseEnter = () => {
-    isHoveredSet(true);
-  };
-  const handleMouseLeave = () => {
-    isHoveredSet(false);
-  };
   const handleChecked = () => {
     isCheckedSet(!isChecked);
   };
+
   return (
-    <section className={css.cardWrapper}>
+    <section
+      className={css.cardWrapper}
+      onMouseEnter={() => isHoveredSet(true)}
+      onMouseLeave={() => isHoveredSet(false)}
+    >
       <img src={src} alt="Cat Image" width={225} height={225} />
-      <LikeCheckBox
-        isChecked={isChecked}
-        isHovered={isHovered}
-        onClick={handleChecked}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      />
+      {isHovered && (
+        <LikeCheckBox isChecked={isChecked} onClick={handleChecked} />
+      )}
     </section>
   );
 }

@@ -10,4 +10,5 @@
   --primary-background-active: #1E88E5;
   --primary-text: #fff;
   --primary-text-inactive: rgba(255, 255, 255, 0.7);
+  --box-blur-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
 }

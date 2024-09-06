@@ -13,5 +13,5 @@
 .cardWrapper:hover {
     opacity: 0.9;
     transform: scale(1.02);
-    box-shadow: 0 4px #0000003a;
+    box-shadow: var(--box-blur-shadow)
 }
