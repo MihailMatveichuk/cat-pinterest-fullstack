@@ -1,44 +1,54 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { cardItems } from '@/mock';
 import { CardsList, LoadButton, Loader } from '@/shared';
+import { getCards } from '@/api';
+import { CardType } from '@/type';
 
 import css from './mainPage.module.css';
 
-export type CardItem = {
-  id: string;
-  src: string;
-  isFavorite: boolean;
-};
+const DEFAULT_LIMIT = 15;
+const MAX_COUNT = 100;
 
 export const MainPage = () => {
-  const [cards, setCardsItem] = useState<CardItem[]>([]);
+  const [cards, setCardsItem] = useState<CardType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [count, setCount] = useState(5);
+  const [limit, setLimit] = useState(DEFAULT_LIMIT);
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      setCardsItem(cardItems);
-      setIsLoading(false);
-    }, 1000);
+    const handleCards = async () => {
+      setIsLoading(true);
+      try {
+        const cards = await getCards(limit);
+        setCardsItem(cards);
+      } catch (error) {
+        throw new Error('Error on get cards');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    return () => clearTimeout(id);
-  }, []);
+    handleCards();
+
+    return () => {};
+  }, [limit]);
 
   const loadMoreCats = () => {
-    setCount((prev) => prev + 5);
+    setLimit((prev) => prev + 5);
   };
 
-  const isButtonVisible = cards.length > count;
+  const isButtonVisible = MAX_COUNT > limit;
 
   const content = useMemo(() => {
     return (
       <div className={css.cardsContainer}>
-        {isLoading ? <Loader /> : <CardsList cards={cards} count={count} />}
-        {isButtonVisible && <LoadButton loadMoreCats={loadMoreCats} />}
+        {cards.length == 0 && !isLoading && <div>Cards not found</div>}
+        {isLoading ? <Loader /> : <CardsList cards={cards} count={limit} />}
+        {isButtonVisible && !isLoading && (
+          <LoadButton loadMoreCats={loadMoreCats} />
+        )}
       </div>
     );
-  }, [cards, count]);
+  }, [cards, limit]);
 
   return <section className={css.content}>{content}</section>;
 };

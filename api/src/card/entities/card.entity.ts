@@ -9,6 +9,9 @@ export class Card {
   @Column()
   imageUrl: string;
 
+  @Column({ unique: true })
+  imageId: string;
+
   @OneToOne(() => Like, (like) => like.card)
   like: Like;
 }

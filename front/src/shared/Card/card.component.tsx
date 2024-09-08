@@ -18,7 +18,7 @@ export function Card({ src }: { src: string }) {
       onMouseEnter={() => isHoveredSet(true)}
       onMouseLeave={() => isHoveredSet(false)}
     >
-      <img src={src} alt="Cat Image" width={225} height={225} />
+      <img src={src} alt="Cat Image" width={225} height={225} loading="lazy" />
       {isHovered && (
         <LikeCheckBox isChecked={isChecked} onClick={handleChecked} />
       )}

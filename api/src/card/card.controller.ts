@@ -11,7 +11,7 @@ export class CardController {
   ) {}
 
   @Get()
-  async findAll(@Query('limit') limit: string) {
+  async findAll(@Query('limit') limit: number) {
     const URL = this.configService.get('API_URL');
     const headers = new Headers({
       'Content-Type': 'application/json',
@@ -30,6 +30,6 @@ export class CardController {
 
     await this.cardService.createCards(response);
 
-    return this.cardService.findAllCards();
+    return this.cardService.findCards(limit);
   }
 }

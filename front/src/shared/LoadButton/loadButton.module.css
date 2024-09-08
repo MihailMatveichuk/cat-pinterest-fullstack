@@ -1,6 +1,13 @@
 .loadMoreCatsButton {
+    border-radius: 30px;
     border: 0;
-    padding-bottom: 10px;
-    background: inherit;
+    padding: 10px;
+    background: var(--primary-background);
+    color: var(--primary-text);
     cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.loadMoreCatsButton:hover {
+    background: var(--primary-background-active);
 }

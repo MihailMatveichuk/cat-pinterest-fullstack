@@ -10,15 +10,20 @@ export class CardService {
     private readonly cardRepository: Repository<Card>,
   ) {}
 
-  async createCards(cards: { url: string }[]): Promise<void> {
-    cards.map(({ url }) => {
-      return this.cardRepository.save({ imageUrl: url });
+  async createCards(cards: { id: string; url: string }[]): Promise<void> {
+    const existedCards = await this.cardRepository.find();
+    cards.map(({ url, id }) => {
+      if (!existedCards.some((card) => card.imageId === id)) {
+        this.cardRepository.save({ imageUrl: url, imageId: id });
+      }
+      return;
     });
   }
 
-  async findAllCards(): Promise<Card[]> {
+  async findCards(limit: number): Promise<Card[]> {
     return this.cardRepository.find({
       relations: ['like'],
+      take: limit,
     });
   }
 }
