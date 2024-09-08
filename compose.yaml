@@ -45,11 +45,11 @@ services:
     networks:
       - cat-pinterest-net  
     environment:
-      POSTGRES_PASSWORD: "1"
+      POSTGRES_PASSWORD: 1
       POSTGRES_USER: postgres
       POSTGRES_DB: support_lk_db
     ports: 
-      - "6500:5432"  
+      - "6501:5432"  
     #      PG_DATA: /var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]

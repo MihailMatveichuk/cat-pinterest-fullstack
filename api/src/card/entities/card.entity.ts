@@ -1,9 +1,5 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Like } from 'src/likes/entities/like.entity';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Card {
@@ -11,11 +7,8 @@ export class Card {
   id: number;
 
   @Column()
-  src: string;
+  imageUrl: string;
 
-  @Column()
-  isChecked: boolean;
-
-  @CreateDateColumn()
-  createdAt: Date;
+  @OneToOne(() => Like, (like) => like.card)
+  like: Like;
 }
