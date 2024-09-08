@@ -13,18 +13,24 @@ export class LikesService {
     private readonly cardRepository: Repository<Card>,
   ) {}
 
-  getAllLikes(): Promise<Like[]> {
-    return this.likeRepository.find();
+  getFavoriteCardsByLikes(): Promise<Like[]> {
+    return this.likeRepository.find({
+      relations: ['card'],
+      where: { isLiked: true },
+    });
   }
 
   async createLike(cat_id: number) {
-    const newLike = this.likeRepository.create();
-    const card = await this.cardRepository.findOneBy({ id: cat_id });
-    return this.likeRepository.save({
-      ...newLike,
-      isLiked: true,
-      card,
+    const existingLike = await this.likeRepository.findOneBy({
+      card: { id: cat_id },
     });
+    if (existingLike) {
+      return this.likeRepository.update(existingLike, { isLiked: true });
+    } else {
+      const newLike = this.likeRepository.create();
+      const card = await this.cardRepository.findOneBy({ id: cat_id });
+      return this.likeRepository.save({ ...newLike, isLiked: true, card });
+    }
   }
 
   deleteLike(cat_id: number): Promise<DeleteResult> {

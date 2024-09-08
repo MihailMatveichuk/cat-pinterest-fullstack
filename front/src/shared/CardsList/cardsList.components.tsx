@@ -8,13 +8,13 @@ export function CardsList({
   count,
 }: {
   cards: CardType[];
-  count: number;
+  count?: number;
 }) {
   return (
     <div className={css.cardsWrapper}>
       {cards
-        .map((item) => {
-          return <Card key={item.id} src={item.imageUrl} />;
+        .map(({ id, imageUrl, like }) => {
+          return <Card key={id} info={{ id, imageUrl, like }} />;
         })
         .slice(0, count)}
     </div>

@@ -32,4 +32,9 @@ export class CardController {
 
     return this.cardService.findCards(limit);
   }
+
+  @Get('favorite')
+  async getFavoriteCards() {
+    return this.cardService.getFavoriteCards();
+  }
 }

@@ -1,15 +1,23 @@
-import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 import { LikesService } from './likes.service';
-import { Like } from './entities/like.entity';
 import { DeleteResult } from 'typeorm';
+import { TransformDataInterceptor } from 'src/interceptors/transform.interceptor';
 
 @Controller('likes')
 export class LikesController {
   constructor(private readonly likesService: LikesService) {}
 
   @Get()
-  getAllLikes(): Promise<Like[]> {
-    return this.likesService.getAllLikes();
+  @UseInterceptors(new TransformDataInterceptor())
+  async getFavoriteCards() {
+    return this.likesService.getFavoriteCardsByLikes();
   }
 
   @Post(':cat_id')

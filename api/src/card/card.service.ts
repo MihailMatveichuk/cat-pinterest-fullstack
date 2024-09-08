@@ -26,4 +26,11 @@ export class CardService {
       take: limit,
     });
   }
+
+  async getFavoriteCards(): Promise<Card[]> {
+    return this.cardRepository.find({
+      relations: ['like'],
+      where: { like: { isLiked: true } },
+    });
+  }
 }

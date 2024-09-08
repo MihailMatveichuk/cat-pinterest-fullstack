@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { CardsList, LoadButton, Loader } from '@/shared';
+import { Content } from '@/shared';
 import { getCards } from '@/api';
 import { CardType } from '@/type';
 
@@ -19,6 +19,7 @@ export const MainPage = () => {
       setIsLoading(true);
       try {
         const cards = await getCards(limit);
+
         setCardsItem(cards);
       } catch (error) {
         throw new Error('Error on get cards');
@@ -38,17 +39,18 @@ export const MainPage = () => {
 
   const isButtonVisible = MAX_COUNT > limit;
 
-  const content = useMemo(() => {
-    return (
-      <div className={css.cardsContainer}>
-        {cards.length == 0 && !isLoading && <div>Cards not found</div>}
-        {isLoading ? <Loader /> : <CardsList cards={cards} count={limit} />}
-        {isButtonVisible && !isLoading && (
-          <LoadButton loadMoreCats={loadMoreCats} />
-        )}
-      </div>
-    );
-  }, [cards, limit]);
+  const content = useMemo(
+    () => (
+      <Content
+        cards={cards}
+        isLoading={isLoading}
+        limit={limit}
+        isButtonVisible={isButtonVisible}
+        loadMoreCats={loadMoreCats}
+      />
+    ),
+    [cards, limit]
+  );
 
   return <section className={css.content}>{content}</section>;
 };
