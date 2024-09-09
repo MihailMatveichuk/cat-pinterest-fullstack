@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import css from './likeCheckBox.module.css';
+
 type Props = {
   isChecked: boolean;
   onClick: () => void;

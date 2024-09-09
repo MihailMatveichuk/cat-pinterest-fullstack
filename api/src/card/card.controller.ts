@@ -2,6 +2,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 
 import { CardService } from './card.service';
 import { ConfigService } from '@nestjs/config';
+import { Card } from './entities/card.entity';
 
 @Controller('/cards')
 export class CardController {
@@ -12,6 +13,15 @@ export class CardController {
 
   @Get()
   async findAll(@Query('limit') limit: number) {
+    const data = await this.cardService.findCards(limit);
+    if (!data || data.length < limit) {
+      return await this.createCards(limit, data);
+    }
+
+    return data;
+  }
+
+  async createCards(limit: number, data: Card[]) {
     const URL = this.configService.get('API_URL');
     const headers = new Headers({
       'Content-Type': 'application/json',
@@ -23,21 +33,19 @@ export class CardController {
       headers: headers,
     };
 
-    const response = await fetch(
+    const response: Response = await fetch(
       `${URL}size=med&mime_types=jpg&format=json&order=ASC&page=1&limit=${limit}`,
       requestOptions,
-    ).then((response: Response) => response.json());
+    );
 
-    await this.cardService.createCards(response);
+    const body = await response.json();
 
-    const data = await this.findAllCards(limit);
+    const newResponse = await body.filter(
+      (card: { id: string }) => !data.some((item) => item.imageId === card.id),
+    );
 
-    console.log(data);
+    const newCards = await this.cardService.createCards(newResponse);
 
-    return data;
-  }
-
-  async findAllCards(limit: number) {
-    await this.cardService.findCards(limit);
+    return [...data, ...newCards];
   }
 }
