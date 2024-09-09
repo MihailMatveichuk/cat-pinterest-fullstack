@@ -2,28 +2,22 @@ import { useEffect, useState } from 'react';
 
 import { LikeCheckBox } from '../LikeCheckbox';
 import { setFavorite } from '@/api';
+import { CardType } from '@/type';
 
 import css from './card.module.css';
 
-type Props = {
-  info: {
-    id: number;
-    imageUrl: string;
-    like: null | {
-      isLiked: boolean;
-      id: number;
-    };
-  };
-};
-
-export function Card({ info }: Props) {
+export function Card({ info }: { info: CardType }) {
   const { id, imageUrl: src, like } = info;
   const isCheckedValue = Boolean(like?.isLiked);
   const [isChecked, isCheckedSet] = useState(isCheckedValue || false);
   const [isHovered, isHoveredSet] = useState(false);
 
   useEffect(() => {
-    isChecked ? setFavorite(id, 'POST') : setFavorite(id, 'DELETE');
+    if (isChecked) {
+      setFavorite(id, 'POST');
+    } else {
+      setFavorite(id, 'DELETE');
+    }
   }, [isChecked]);
 
   const handleChecked = () => {

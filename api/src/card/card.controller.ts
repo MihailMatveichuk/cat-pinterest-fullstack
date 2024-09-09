@@ -46,6 +46,8 @@ export class CardController {
 
     const newCards = await this.cardService.createCards(newResponse);
 
-    return [...data, ...newCards];
+    data.push(...newCards);
+
+    return data;
   }
 }
