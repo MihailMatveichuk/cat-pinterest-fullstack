@@ -13,8 +13,8 @@ export class LikesService {
     private readonly cardRepository: Repository<Card>,
   ) {}
 
-  getFavoriteCardsByLikes(): Promise<Like[]> {
-    return this.likeRepository.find({
+  async getFavoriteCardsByLikes(): Promise<Like[]> {
+    return await this.likeRepository.find({
       relations: ['card'],
       where: { isLiked: true },
     });
@@ -33,7 +33,7 @@ export class LikesService {
     }
   }
 
-  deleteLike(cat_id: number): Promise<DeleteResult> {
-    return this.likeRepository.delete({ card: { id: cat_id } });
+  async deleteLike(cat_id: number): Promise<DeleteResult> {
+    return await this.likeRepository.delete({ card: { id: cat_id } });
   }
 }

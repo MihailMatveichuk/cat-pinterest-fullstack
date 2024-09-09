@@ -21,8 +21,8 @@ export function Content({
 }: Props) {
   return (
     <div className={css.cardsContainer}>
-      {cards.length == 0 && !isLoading && <div>Cards not found</div>}
       {isLoading ? <Loader /> : <CardsList cards={cards} count={limit} />}
+      {cards.length == 0 && !isLoading && <div>Cards not found</div>}
       {isButtonVisible && !isLoading && (
         <LoadButton loadMoreCats={loadMoreCats!} />
       )}

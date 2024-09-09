@@ -30,11 +30,14 @@ export class CardController {
 
     await this.cardService.createCards(response);
 
-    return this.cardService.findCards(limit);
+    const data = await this.findAllCards(limit);
+
+    console.log(data);
+
+    return data;
   }
 
-  @Get('favorite')
-  async getFavoriteCards() {
-    return this.cardService.getFavoriteCards();
+  async findAllCards(limit: number) {
+    await this.cardService.findCards(limit);
   }
 }

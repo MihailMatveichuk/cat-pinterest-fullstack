@@ -17,12 +17,12 @@ export class LikesController {
   @Get()
   @UseInterceptors(new TransformDataInterceptor())
   async getFavoriteCards() {
-    return this.likesService.getFavoriteCardsByLikes();
+    return await this.likesService.getFavoriteCardsByLikes();
   }
 
   @Post(':cat_id')
-  createLike(@Param('cat_id') cat_id: number) {
-    return this.likesService.createLike(cat_id);
+  async createLike(@Param('cat_id') cat_id: number) {
+    return await this.likesService.createLike(cat_id);
   }
 
   @Delete(':cat_id')

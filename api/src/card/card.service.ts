@@ -21,16 +21,9 @@ export class CardService {
   }
 
   async findCards(limit: number): Promise<Card[]> {
-    return this.cardRepository.find({
+    return await this.cardRepository.find({
       relations: ['like'],
       take: limit,
-    });
-  }
-
-  async getFavoriteCards(): Promise<Card[]> {
-    return this.cardRepository.find({
-      relations: ['like'],
-      where: { like: { isLiked: true } },
     });
   }
 }
