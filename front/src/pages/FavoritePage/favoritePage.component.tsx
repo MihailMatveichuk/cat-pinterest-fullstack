@@ -10,7 +10,7 @@ import css from './favoritePage.module.css';
 
 export function FavoritePage() {
   const { catCards, isLoading } = useFetch(
-    'http://host.docker.internal:3000/api/likes'
+    'http://host.docker.internal:3001/api/likes'
   );
   const dispatch = useDispatch();
 

@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
-
-import css from './likeCheckBox.module.css';
+import css from './likedCheckBox.module.css';
 
 type Props = {
   isChecked: boolean;
@@ -78,3 +77,12 @@ export function LikeCheckBox({ isChecked, onClick }: Props) {
     </div>
   );
 }
+
+// .likeCheckBoxWrapper {
+//     position: absolute;
+//     bottom: 17px;
+//     right: 17px;
+//     cursor: pointer;
+//     width: min-content;
+//     aspect-ratio: 1 / 1;
+// }

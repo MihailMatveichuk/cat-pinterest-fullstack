@@ -12,7 +12,7 @@ export const MainPage = () => {
   const [limit, setLimit] = useState(DEFAULT_LIMIT);
 
   const { catCards, isLoading } = useFetch(
-    'http://host.docker.internal:3000/api/cards',
+    'http://host.docker.internal:3001/api/cards',
     limit
   );
 
