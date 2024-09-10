@@ -2,6 +2,8 @@
 
 - Typescript
 - React js
+- Redux Toolkit
+- CSS modules
 - Nest.js
 - CATS API
 - ORM: Type ORM
