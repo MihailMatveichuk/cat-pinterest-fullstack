@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { LikeCheckBox } from '../LikeCheckbox';
 import { setFavorite } from '@/api';
 import { CardType } from '@/type';
+import { deleteCardById } from '@/store/slice';
 
 import css from './card.module.css';
 
@@ -11,17 +13,16 @@ export function Card({ info }: { info: CardType }) {
   const isCheckedValue = Boolean(like?.isLiked);
   const [isChecked, isCheckedSet] = useState(isCheckedValue || false);
   const [isHovered, isHoveredSet] = useState(false);
-
-  useEffect(() => {
-    if (isChecked) {
-      setFavorite(id, 'POST');
-    } else {
-      setFavorite(id, 'DELETE');
-    }
-  }, [isChecked]);
+  const dispatch = useDispatch();
 
   const handleChecked = () => {
     isCheckedSet(!isChecked);
+    if (!isChecked) {
+      setFavorite(id, 'POST');
+    } else {
+      setFavorite(id, 'DELETE');
+      dispatch(deleteCardById(id));
+    }
   };
 
   return (

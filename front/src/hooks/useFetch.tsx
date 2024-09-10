@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { CardType } from '@/type';
-import { useLocation } from 'react-router-dom';
 
 export function useFetch(url: string, limit?: number) {
   const [catCards, setCardsItem] = useState<CardType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { pathname } = useLocation();
-
-  const dependencies =
-    pathname === '/favorite' ? [url, catCards] : [url, limit];
 
   useEffect(() => {
     const handleCards = async () => {
@@ -26,7 +21,7 @@ export function useFetch(url: string, limit?: number) {
       }
     };
     handleCards();
-  }, dependencies);
+  }, [url, limit]);
 
   return { catCards, isLoading };
 }
